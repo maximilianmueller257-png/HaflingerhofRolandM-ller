@@ -327,10 +327,9 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   .hero-mobile-eyebrow {
     display:block; position:absolute; left:1.5rem; right:1.5rem; bottom:1.6rem;
     z-index:10; text-align:center;
-    font-family:Arial,sans-serif; font-size:0.66rem; letter-spacing:0.18em;
+    font-family:Arial,sans-serif; font-size:0.58rem; letter-spacing:0.16em;
     text-transform:uppercase; color:#f0dfc0; line-height:1.9;
-    padding:0.7rem 0.8rem; border-radius:4px;
-    background:rgba(40,18,3,0.45);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.7);
     transition: opacity 0.5s ease;
   }
   .hero-mobile-eyebrow.fade-out { opacity:0; }
@@ -347,11 +346,19 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   .kontakt-top { grid-template-columns:1fr; }
   .kontakt-bottom-row { grid-template-columns:1fr; }
 
-  /* Zeitstrahl mobil: Linie links, Bild über Text, beide sauber im Feld */
+  /* Zeitstrahl mobil: Linie links, Bild über Text, beide volle Breite */
   .tl-wrap::before { left:1.25rem; }
-  .tl-entry { grid-template-columns:2.5rem 1fr; }
+  .tl-entry {
+    display:block;
+    padding-left:2.75rem;
+    position:relative;
+  }
+  .tl-entry .tl-center {
+    position:absolute; left:0; top:0; width:2.5rem;
+    display:block;
+  }
   .tl-entry.img-left .tl-img-side, .tl-entry.img-right .tl-img-side {
-    display:block; order:2; padding:0 0.5rem 0.8rem 1rem; text-align:left;
+    display:block; padding:0 0 0.9rem 0; text-align:left;
     opacity:1 !important; transform:none !important;
   }
   .tl-entry.img-left .tl-img-side img, .tl-entry.img-right .tl-img-side img {
@@ -360,10 +367,9 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   .tl-entry.img-left .tl-img-side .tl-img-caption,
   .tl-entry.img-right .tl-img-side .tl-img-caption { text-align:left; }
   .tl-entry.img-left .tl-text-side, .tl-entry.img-right .tl-text-side {
-    order:3; padding:0 0.5rem 0 1rem; text-align:left;
+    padding:0; text-align:left;
     opacity:1 !important; transform:none !important;
   }
-  .tl-entry.img-left .tl-center, .tl-entry.img-right .tl-center { order:1; }
   .tl-entry.img-right .tl-detail { border-right:none; border-left:2px solid #e0ccaa; }
 }
 
