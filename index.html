@@ -163,7 +163,8 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .kontakt .label { color:#c89a5a; }
 .kontakt h2 { color:#f5e6cc; }
 .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem, 3vw, 3rem); margin-top:2.5rem; align-items:start; }
-.kontakt-left { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; }
+.kontakt-top { display:grid; grid-template-columns:1fr 2fr; gap:1.5rem; align-items:start; grid-column: span 2; margin-bottom: 2rem; }
+.kontakt-bottom-row { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem, 3vw, 3rem); grid-column: span 2; }
 .kontakt-map { border: 1px solid rgba(245,230,204,0.15); overflow:hidden; }
 .kontakt-map iframe { width:100%; height:320px; border:none; display:block; }
 .kontakt-info p { font-family:Arial,sans-serif; font-size: clamp(0.85rem, 1vw, 0.9rem); color:#d4b896; margin-bottom:0.45rem; line-height:1.7; }
@@ -225,7 +226,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   </div>
   <div class="hero-labels">
     <div class="hero-label">Afra · Gründerstute Linie A</div>
-    <div class="hero-label">Marnie · Gründerstute Linie M · Roland Müller &nbsp;|&nbsp; Tanja Meyer · Monique</div>
+    <div class="hero-label" style="text-align:right;">Roland Müller &nbsp;|&nbsp; Tanja Meyer · Monique<br>Marnie · Gründerstute Linie M</div>
   </div>
 </div>
 
@@ -498,7 +499,8 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     <div class="label">Kontakt</div>
     <h2>Sprechen Sie uns an</h2>
     <div class="kontakt-grid">
-      <div class="kontakt-left">
+      <!-- Oben: Adresse + Karte nebeneinander -->
+      <div class="kontakt-top">
         <div class="kontakt-info">
           <p style="margin-bottom:1.5rem;">Ob Fragen zu unseren Stuten, aktuellen Fohlen oder unserer Zucht – wir freuen uns über jede Nachricht von Gleichgesinnten.</p>
           <p><strong>Roland Müller</strong></p>
@@ -507,18 +509,23 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
           <br>
           <p><strong>Telefon:</strong> <a href="tel:+4915906186617">+49 159 06186617</a></p>
           <p><strong>E-Mail:</strong> <a href="mailto:Muellerroland2016@gmail.com">Muellerroland2016@gmail.com</a></p>
-          <div class="kontakt-note">Rufen Sie uns gerne an oder schreiben Sie eine E-Mail – der persönliche Kontakt ist uns wichtig. Wir vereinbaren gerne einen Termin, damit Sie unsere Pferde vor Ort kennenlernen können. Bei allen anderen Anliegen rund um unsere Zucht melden Sie sich ebenso gerne bei uns.</div>
         </div>
         <div class="kontakt-map">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.87703055213!2d10.625806376730681!3d52.62606627208913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47afc3bbd8f07cef%3A0x307d76f3aaf50d97!2sRietberg%208%2C%2029396%20Sch%C3%B6new%C3%B6rde!5e0!3m2!1sde!2sde!4v1781779532965!5m2!1sde!2sde" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
-      <div class="kontakt-form">
-        <input type="text" placeholder="Ihr Name">
-        <input type="email" placeholder="Ihre E-Mail">
-        <input type="text" placeholder="Betreff">
-        <textarea placeholder="Ihre Nachricht ..."></textarea>
-        <button>Nachricht senden</button>
+      <!-- Unten: Kontakttext + Formular nebeneinander -->
+      <div class="kontakt-bottom-row">
+        <div class="kontakt-note" style="align-self:start;">
+          Rufen Sie uns gerne an oder schreiben Sie eine E-Mail – der persönliche Kontakt ist uns wichtig. Wir vereinbaren gerne einen Termin, damit Sie unsere Pferde vor Ort kennenlernen können. Bei allen anderen Anliegen rund um unsere Zucht melden Sie sich ebenso gerne bei uns.
+        </div>
+        <div class="kontakt-form">
+          <input type="text" placeholder="Ihr Name">
+          <input type="email" placeholder="Ihre E-Mail">
+          <input type="text" placeholder="Betreff">
+          <textarea placeholder="Ihre Nachricht ..."></textarea>
+          <button>Nachricht senden</button>
+        </div>
       </div>
     </div>
   </div>
