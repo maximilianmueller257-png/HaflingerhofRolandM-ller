@@ -199,8 +199,12 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .fohlen { background: #f7efe3; }
 .fohlen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 3rem); align-items: center; margin-top: 2.5rem; }
 .fohlen-img-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.4rem, 1vw, 0.75rem); }
-.fohlen-img-wrap img { width:100%; aspect-ratio:1; object-fit:cover; display:block; border:1px solid #e0ccaa; cursor:pointer; }
-.fohlen-img-wrap img:first-child { grid-column:span 2; aspect-ratio:16/7; }
+.fohlen-img-wrap { overflow:visible; }
+.fohlen-img-wrap a { display:block; overflow:hidden; border:1px solid #e0ccaa; }
+.fohlen-img-wrap img { width:100%; aspect-ratio:1; object-fit:cover; display:block; cursor:pointer; transition: transform 0.45s ease; }
+.fohlen-img-wrap img:hover { transform: scale(1.06); }
+.fohlen-img-wrap a:first-child { grid-column:span 2; }
+.fohlen-img-wrap a:first-child img { aspect-ratio:16/7; }
 
 /* ERFOLGE */
 .erfolge { background: #fdf8f2; }
@@ -475,14 +479,14 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
         <div class="tl-img-side landscape">
-          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/asta%20in%20der%20mitte%20neben%20dem%20fohlen%20rechts%2C%202.%20pferd%20von%20links%20afra.jpg" alt="Haflingerherde auf der Weide – Afra zweite von links, Asta in der Mitte" loading="lazy">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/die%20herde.jpg" alt="Haflingerherde auf der Weide – Afra zweite von links, Asta in der Mitte" loading="lazy">
           <div class="tl-img-caption">Die Herde – Afra (2. v. l.), Asta (Mitte)</div>
         </div>
       </div>
 
       <div class="tl-entry img-left">
         <div class="tl-img-side landscape">
-          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/l%20melissa%20r%20maiglo%CC%88ckchen%20m%20melinda.jpeg" alt="Landesponyschau 2022 – Roland Müller mit Jürgen Kolodinski und Stuten Melissa, Maiglöckchen, Melinda" loading="lazy">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/2%20l%20melissa%20r%20maiglo%CC%88ckchen%20m%20melinda.jpg" alt="Haflingerstuten Melissa, Maiglöckchen und Melinda" loading="lazy">
           <div class="tl-img-caption">Landesponyschau 2022 – Roland Müller (Mitte), Jürgen Kolodinski (rechts)</div>
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
@@ -568,9 +572,9 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     <h2>Fohlenjahrgang 2026</h2>
     <div class="fohlen-grid">
       <div class="fohlen-img-wrap">
-        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/melodie%20fohlen.png" alt="Haflinger-Stutfohlen Melodie, geboren 2025, Mutter Maria, Vater Barclay" loading="lazy">
-        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/mu%CC%88ri.jpeg" alt="Haflingerstute Müri" loading="lazy">
-        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/mia.jpeg" alt="Haflingerstute Mia" loading="lazy">
+        <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/melodie%20fohlen.png" alt="Haflinger-Stutfohlen Melodie, geboren 2025, Mutter Maria, Vater Barclay" loading="lazy"></a>
+        <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/mu%CC%88ri.jpeg" alt="Haflingerstute Müri" loading="lazy"></a>
+        <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/mia.jpeg" alt="Haflingerstute Mia" loading="lazy"></a>
       </div>
       <div>
         <p class="prose">Unser jüngstes Stutfohlen <strong>Melodie</strong> (geb. 2025) stammt aus unserer <strong>Maria</strong>, Vater ist <strong>Barclay</strong>. Bei der letzten Fohleneintragung in Päse belegte sie den ersten Platz.</p>
