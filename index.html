@@ -347,12 +347,20 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   .kontakt-top { grid-template-columns:1fr; }
   .kontakt-bottom-row { grid-template-columns:1fr; }
 
-  /* Zeitstrahl mobil: Linie links, Text sauber zentriert im eigenen Feld */
+  /* Zeitstrahl mobil: Linie links, Bild über Text, beide sauber im Feld */
   .tl-wrap::before { left:1.25rem; }
   .tl-entry { grid-template-columns:2.5rem 1fr; }
-  .tl-entry.img-left .tl-img-side, .tl-entry.img-right .tl-img-side { display:none; }
+  .tl-entry.img-left .tl-img-side, .tl-entry.img-right .tl-img-side {
+    display:block; order:2; padding:0 0.5rem 0.8rem 1rem; text-align:left;
+    opacity:1 !important; transform:none !important;
+  }
+  .tl-entry.img-left .tl-img-side img, .tl-entry.img-right .tl-img-side img {
+    aspect-ratio:4/3; width:100%;
+  }
+  .tl-entry.img-left .tl-img-side .tl-img-caption,
+  .tl-entry.img-right .tl-img-side .tl-img-caption { text-align:left; }
   .tl-entry.img-left .tl-text-side, .tl-entry.img-right .tl-text-side {
-    order:2; padding:0 0.5rem 0 1rem; text-align:left;
+    order:3; padding:0 0.5rem 0 1rem; text-align:left;
     opacity:1 !important; transform:none !important;
   }
   .tl-entry.img-left .tl-center, .tl-entry.img-right .tl-center { order:1; }
