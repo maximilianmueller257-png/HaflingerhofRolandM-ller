@@ -112,6 +112,7 @@ nav {
 .hero-label { font-family: Arial, sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240,223,192,0.75); line-height: 2; }
 .hero-scroll { display: inline-block; font-family: Arial, sans-serif; font-size: 0.8rem; color: #f0dfc0; letter-spacing: 0.1em; cursor: pointer; border-bottom: 1px solid rgba(240,223,192,0.5); padding-bottom: 2px; }
 .hero-scroll:hover { color: #fff; }
+.hero-mobile-eyebrow { display:none; }
 
 .divider { height: 1px; background: #e0ccaa; margin: 0 2.5rem; }
 section { padding: clamp(3rem, 6vw, 5.5rem) clamp(1rem, 3vw, 2rem); }
@@ -313,13 +314,26 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   /* Aufgeräumte Hero: nur ein Bild (Roland & Tanja-Seite), weniger Text */
   .hero-bg { grid-template-columns: 1fr; }
   .hero-bg-left { display:none; }
-  .hero-bg-right { background-position: center; }
+  .hero-bg-right { background-position: center 28%; background-size: cover; }
   .hero-bg-left::after { display:none; }
+  .hero { height: calc(100vh - 3.75rem); }
   .hero-eyebrow { font-size:0.62rem; margin-bottom:0.9rem; }
   .hero h1 { font-size: clamp(1.7rem, 8vw, 2.4rem); }
   .hero-sub { display:none; }
   .hero-labels { display:none; }
   .hero-content { padding:1.5rem; }
+  /* Eyebrow auf Mobile: aus dem Zentrum raus, unter "Mehr entdecken" */
+  .hero-content .hero-eyebrow { display:none; }
+  .hero-mobile-eyebrow {
+    display:block; position:absolute; left:1.5rem; right:1.5rem; bottom:1.6rem;
+    z-index:10; text-align:center;
+    font-family:Arial,sans-serif; font-size:0.66rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:#f0dfc0; line-height:1.9;
+    padding:0.7rem 0.8rem; border-radius:4px;
+    background:rgba(40,18,3,0.45);
+    transition: opacity 0.5s ease;
+  }
+  .hero-mobile-eyebrow.fade-out { opacity:0; }
 
   .phil-grid, .stuten-header, .fohlen-grid, .partner-grid, .ueber-grid, .kontakt-grid { grid-template-columns:1fr; }
   .stuten-grid { grid-template-columns:1fr 1fr; }
@@ -328,6 +342,8 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   .erfolge-highlight { flex-direction:column; gap:1rem; text-align:center; }
   .erfolge-big { justify-content:center; }
   .erfolge-allegra { grid-template-columns:1fr; }
+  .erfolge-allegra-text { padding: clamp(1rem, 2vw, 1.5rem); text-align:center; }
+  .erfolge-allegra-text .prose { max-width:100%; }
   .kontakt-top { grid-template-columns:1fr; }
   .kontakt-bottom-row { grid-template-columns:1fr; }
 
@@ -390,6 +406,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     <p class="hero-sub">Naturnahe Haflingerzucht auf weitläufigen Weiden. Nicht für den Umsatz – für die Tiere, die Leidenschaft und eine Zucht, die über Generationen trägt.</p>
     <span class="hero-scroll" onclick="document.getElementById('philosophie').scrollIntoView({behavior:'smooth'})">Mehr entdecken ↓</span>
   </div>
+  <div class="hero-mobile-eyebrow" id="heroMobileEyebrow">Haflingerzucht · Schönewörde, Niedersachsen<br>Seit über 40 Jahren</div>
   <div class="hero-labels">
     <div class="hero-label">Afra · Gründerstute Linie A</div>
     <div class="hero-label" style="text-align:right;">Roland Müller &nbsp;|&nbsp; Tanja Meyer · Monique<br>Marnie · Gründerstute Linie M</div>
@@ -906,6 +923,17 @@ document.querySelectorAll('.stute-img, .fohlen-img-wrap img, .tl-img-side img, .
   img.addEventListener('click', () => openLightbox(img.src, img.alt));
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* ===== Hero-Eyebrow (Mobile) beim Scrollen ausblenden ===== */
+const heroEyebrow = document.getElementById('heroMobileEyebrow');
+window.addEventListener('scroll', () => {
+  if (heroEyebrow && window.scrollY > 30) heroEyebrow.classList.add('fade-out');
+  else if (heroEyebrow) heroEyebrow.classList.remove('fade-out');
+}, { passive: true });
+// Auch bei Klick auf einen Menüpunkt sofort ausblenden
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => { if (heroEyebrow) heroEyebrow.classList.add('fade-out'); });
+});
 </script>
 
 <footer>&copy; 2026 Haflingerhof Roland Müller · Rietberg 8, 29396 Schönewörde &nbsp;·&nbsp; <a href="#" onclick="openModal('impressum');return false;" style="color:#9c7d5c;text-decoration:none;">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="openModal('datenschutz');return false;" style="color:#9c7d5c;text-decoration:none;">Datenschutz</a></footer>
