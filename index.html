@@ -33,12 +33,9 @@ nav {
   background: url('https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra.png') center/cover no-repeat;
 }
 .hero-bg-left::after {
-  content:''; position:absolute; top:0; right:-6rem; bottom:0; width:12rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  content:''; position:absolute; top:0; right:-2rem; bottom:0; width:4rem;
+  background: linear-gradient(to right, transparent 0%, rgba(20,20,20,0.85) 50%, transparent 100%);
   z-index:1;
-  mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
   pointer-events: none;
 }
 .hero-bg-right {
@@ -218,7 +215,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Haflingerzucht · Schönewörde, Niedersachsen · Seit über 40 Jahren</div>
+    <div class="hero-eyebrow">Haflingerzucht · Schönewörde, Niedersachsen<br>Seit über 40 Jahren</div>
     <h1>Zucht im Sinne<br>der Pferde</h1>
     <p class="hero-sub">Naturnahe Haflingerzucht auf weitläufigen Weiden. Nicht für den Umsatz – für die Tiere, die Leidenschaft und eine Zucht, die über Generationen trägt.</p>
     <span class="hero-scroll" onclick="document.getElementById('philosophie').scrollIntoView({behavior:'smooth'})">Mehr entdecken ↓</span>
