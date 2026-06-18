@@ -289,6 +289,8 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .form-status { font-family:Arial,sans-serif; font-size:0.8rem; color:#9bd09b; min-height:1rem; }
 
 footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family:Arial,sans-serif; font-size:0.78rem; color:#7a6050; }
+.footer-line { display:inline; }
+.footer-sep { display:inline; }
 
 /* LIGHTBOX */
 .lightbox { display:none; position:fixed; inset:0; background:rgba(20,10,2,0.92); z-index:2000; align-items:center; justify-content:center; padding:2rem; cursor:zoom-out; }
@@ -531,7 +533,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
       <div class="tl-entry img-right">
         <div class="tl-text-side">
           <div class="tl-year">Heute</div>
-          <div class="tl-title">Zucht in zweiter Generation – aus eigener Zucht</div>
+          <div class="tl-title">Vierte und fünfte Generation – aus eigener Zucht</div>
           <div class="tl-text">Heute werden beide Linien in Generationen aus Stuten weitergezüchtet, die allesamt im eigenen Betrieb geboren wurden. Über 100 Fohlen hat die Zucht Roland Müller in diesen Jahrzehnten hervorgebracht.</div>
           <div class="tl-detail"><strong>Die A-Linie heute:</strong> Aus Afra kam Asta, aus Asta folgten Annabel und Allegra – die A-Linie befindet sich damit in der vierten Generation. Mit Allegra als Staatsprämienanwärterin beginnt bereits die fünfte Generation dieser ältesten Linie der Zucht.<br><br><strong>Die M-Linie heute:</strong> Marnie begründete die Linie, aus ihr folgten Töchter wie Melinda und Melissa, deren Nachkommen wie Müri und Mia heute als Zuchtstuten aktiv sind – die M-Linie befindet sich in der dritten Generation.</div>
         </div>
@@ -950,7 +952,13 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 });
 </script>
 
-<footer>&copy; 2026 Haflingerhof Roland Müller · Rietberg 8, 29396 Schönewörde &nbsp;·&nbsp; <a href="#" onclick="openModal('impressum');return false;" style="color:#9c7d5c;text-decoration:none;">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="openModal('datenschutz');return false;" style="color:#9c7d5c;text-decoration:none;">Datenschutz</a></footer>
+<footer>
+  <span class="footer-line">&copy; 2026 Haflingerhof Roland Müller</span>
+  <span class="footer-sep"> · </span>
+  <span class="footer-line">Rietberg 8, 29396 Schönewörde</span>
+  <span class="footer-sep"> · </span>
+  <span class="footer-line footer-legal"><a href="#" onclick="openModal('impressum');return false;" style="color:#9c7d5c;text-decoration:none;">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="openModal('datenschutz');return false;" style="color:#9c7d5c;text-decoration:none;">Datenschutz</a></span>
+</footer>
 
 </body>
 </html>
