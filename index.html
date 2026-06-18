@@ -71,6 +71,13 @@ nav {
 .nav-links a { color: #7a5c3a; text-decoration: none; }
 .nav-links a:hover { color: #c89a5a; }
 
+/* ===== Burger-Menü (mobil) ===== */
+.nav-burger { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:0.4rem; }
+.nav-burger span { width:22px; height:2px; background:#7a5c3a; display:block; transition:0.3s; }
+.nav-burger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity:0; }
+.nav-burger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+
 /* HERO */
 .hero {
   margin-top: 3.75rem; height: calc(100vh - 3.75rem);
@@ -118,7 +125,7 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal, .tl-entry { opacity: 1 !important; transform: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
 
@@ -146,8 +153,13 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .tl-entry.img-right .tl-center { order:2; }
 .tl-entry.img-right .tl-img-side { order:3; padding-left: clamp(1rem, 2.5vw, 2.5rem); }
 .tl-center { display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; z-index:2; }
-.tl-dot { width:1rem; height:1rem; border-radius:50%; background:#c89a5a; border:3px solid #f7efe3; box-shadow:0 0 0 2px #c89a5a; flex-shrink:0; }
-.tl-img-side img { width:100%; aspect-ratio:3/4; object-fit:cover; border:1px solid #e0ccaa; display:block; }
+.tl-dot { width:1rem; height:1rem; border-radius:50%; background:#c89a5a; border:3px solid #f7efe3; box-shadow:0 0 0 2px #c89a5a; flex-shrink:0; transition: transform 0.4s ease; }
+.tl-entry.visible .tl-dot { transform: scale(1.15); }
+
+/* Zeitstrahl Bilder: klickbar + Hover-Zoom */
+.tl-img-side { overflow:hidden; }
+.tl-img-side img { width:100%; aspect-ratio:3/4; object-fit:cover; border:1px solid #e0ccaa; display:block; cursor:pointer; transition: transform 0.45s ease; }
+.tl-img-side img:hover { transform: scale(1.06); }
 .tl-img-side.landscape img { aspect-ratio:4/3; }
 .tl-img-caption { font-family:Arial,sans-serif; font-size:0.7rem; color:#a08060; margin-top:0.4rem; font-style:italic; }
 .tl-entry.img-right .tl-img-side .tl-img-caption { text-align:left; }
@@ -159,6 +171,14 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .tl-text { font-family:Arial,sans-serif; font-size: clamp(0.82rem, 1vw, 0.88rem); color:#7a6050; line-height:1.75; }
 .tl-detail { margin-top:0.75rem; padding:0.8rem 1rem; background:rgba(255,255,255,0.6); border-left:2px solid #e0ccaa; font-family:Arial,sans-serif; font-size: clamp(0.78rem, 0.95vw, 0.82rem); color:#9c7d5c; line-height:1.65; }
 .tl-entry.img-right .tl-detail { border-left:none; border-right:2px solid #e0ccaa; }
+
+/* Zeitstrahl: subtiles Einblenden von links/rechts beim Scrollen */
+.tl-entry .tl-img-side, .tl-entry .tl-text-side { opacity:0; transition: opacity 0.7s ease, transform 0.7s ease; }
+.tl-entry.img-left  .tl-img-side  { transform: translateX(-28px); }
+.tl-entry.img-left  .tl-text-side { transform: translateX(28px); }
+.tl-entry.img-right .tl-text-side { transform: translateX(-28px); }
+.tl-entry.img-right .tl-img-side  { transform: translateX(28px); }
+.tl-entry.visible .tl-img-side, .tl-entry.visible .tl-text-side { opacity:1; transform: translateX(0); }
 
 /* ZUCHTSTUTEN */
 .stuten { background: #fdf8f2; }
@@ -185,7 +205,21 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 /* ERFOLGE */
 .erfolge { background: #fdf8f2; }
 .erfolge-highlight { background:#f7efe3; border:1px solid #e0ccaa; border-left:3px solid #c89a5a; padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 2rem); margin-bottom:2rem; display:flex; align-items:center; gap:2rem; }
-.erfolge-big { font-size: clamp(2rem, 3.5vw, 2.8rem); color:#c89a5a; line-height:1; flex-shrink:0; }
+.erfolge-big { font-size: clamp(2rem, 3.5vw, 2.8rem); color:#c89a5a; line-height:1; flex-shrink:0; display:flex; }
+/* Zähl-/Fall-Animation für die 136 */
+.erfolge-big .digit { display:inline-block; opacity:0; transform: translateY(-0.6em); }
+.erfolge-big.animate .digit { animation: digitDrop 0.34s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.erfolge-big.animate .digit:nth-child(1) { animation-delay: 0.05s; }
+.erfolge-big.animate .digit:nth-child(2) { animation-delay: 0.27s; }
+.erfolge-big.animate .digit:nth-child(3) { animation-delay: 0.49s; }
+@keyframes digitDrop {
+  0%   { opacity:0; transform: translateY(-0.6em); }
+  60%  { opacity:1; transform: translateY(0.08em); }
+  100% { opacity:1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .erfolge-big .digit { opacity:1 !important; transform:none !important; animation:none !important; }
+}
 .erfolge-big-label { font-family:Arial,sans-serif; font-size: clamp(0.82rem, 1vw, 0.88rem); color:#7a6050; line-height:1.6; }
 .erfolge-big-label strong { color:#5c3e1e; display:block; font-size: clamp(0.9rem, 1.2vw, 1rem); margin-bottom:0.2rem; }
 .erfolge-list { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
@@ -193,7 +227,9 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .erfolg-cat { font-family:Arial,sans-serif; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:#c89a5a; margin-bottom:0.4rem; }
 .erfolg-text { font-family:Arial,sans-serif; font-size: clamp(0.82rem, 1vw, 0.88rem); color:#6b5540; line-height:1.65; }
 .erfolge-allegra { display:grid; grid-template-columns: clamp(8rem, 15vw, 11rem) 1fr; gap:2rem; align-items:center; background:#fff; border:1px solid #e0ccaa; overflow:hidden; }
-.erfolge-allegra img { width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
+.erfolge-allegra .ea-img-wrap { overflow:hidden; align-self:stretch; }
+.erfolge-allegra img { width:100%; height:100%; aspect-ratio:3/4; object-fit:cover; display:block; cursor:pointer; transition: transform 0.45s ease; }
+.erfolge-allegra img:hover { transform: scale(1.06); }
 .erfolge-allegra-text { padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem) 0; }
 .erfolge-allegra-text h3 { font-size: clamp(1rem, 1.5vw, 1.1rem); color:#5c3e1e; font-weight:normal; margin-bottom:0.75rem; }
 .erfolge-note { font-family:Arial,sans-serif; font-size:0.82rem; color:#a08060; font-style:italic; margin-top:1.5rem; }
@@ -211,9 +247,9 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 
 /* ÜBER UNS */
 .ueber { background: #fdf8f2; }
-.ueber-grid { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items:center; }
-.ueber-img { width:100%; aspect-ratio:16/9; overflow:hidden; border:1px solid #e0ccaa; }
-.ueber-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.ueber-grid { display:grid; grid-template-columns:0.85fr 1.15fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items:center; }
+.ueber-img { width:100%; overflow:hidden; }
+.ueber-img img { width:100%; height:auto; display:block; }
 .verband-badge { margin-top:2rem; display:inline-flex; align-items:center; gap:0.75rem; border:1px solid #e0ccaa; padding:0.7rem 1.1rem; background:#fff; font-family:Arial,sans-serif; font-size:0.82rem; color:#7a6050; }
 .verband-dot { width:0.625rem; height:0.625rem; background:#c89a5a; border-radius:50%; flex-shrink:0; }
 
@@ -226,7 +262,6 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .kontakt-bottom-row { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem, 3vw, 3rem); grid-column: span 2; align-items:start; }
 .kontakt-map { border: 1px solid rgba(245,230,204,0.15); overflow:hidden; height:100%; position:relative; min-height:280px; }
 .kontakt-map iframe { width:100%; height:100%; min-height:280px; border:none; display:block; }
-/* DSGVO Zwei-Klick-Platzhalter für Google Maps */
 .map-consent { position:absolute; inset:0; background:#2a1a08; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1.5rem; gap:0.9rem; }
 .map-consent p { font-family:Arial,sans-serif; font-size:0.82rem; color:#d4b896; line-height:1.6; max-width:22rem; }
 .map-consent a { color:#c89a5a; }
@@ -246,6 +281,7 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .form-consent { display:flex; align-items:flex-start; gap:0.5rem; font-family:Arial,sans-serif; font-size:0.75rem; color:#c4a07a; line-height:1.5; }
 .form-consent input { width:auto; flex-shrink:0; margin-top:0.15rem; }
 .form-consent a { color:#c89a5a; }
+.form-status { font-family:Arial,sans-serif; font-size:0.8rem; color:#9bd09b; min-height:1rem; }
 
 footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family:Arial,sans-serif; font-size:0.78rem; color:#7a6050; }
 
@@ -255,20 +291,69 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
 .lightbox img { max-width:92vw; max-height:88vh; object-fit:contain; border:2px solid rgba(200,154,90,0.4); box-shadow:0 10px 40px rgba(0,0,0,0.5); }
 .lightbox-close { position:absolute; top:1.2rem; right:1.8rem; color:#f0dfc0; font-size:2rem; cursor:pointer; background:none; border:none; line-height:1; }
 
+/* ============================================================
+   MOBILE (Hochkant ist Maßstab; Querformat folgt derselben Logik)
+   ============================================================ */
 @media (max-width: 768px) {
+  nav { padding: 0 1.25rem; }
+  .nav-burger { display:flex; }
+  .nav-links {
+    position:fixed; top:3.75rem; left:0; right:0;
+    background:rgba(253,248,242,0.99); border-bottom:1px solid #e0ccaa;
+    flex-direction:column; gap:0; padding:0.5rem 0;
+    transform:translateY(-130%); transition:transform 0.35s ease; z-index:99;
+  }
+  .nav-links.open { transform:translateY(0); display:flex; }
+  .nav-links a { padding:0.85rem 1.5rem; border-bottom:1px solid #f0e2cc; font-size:0.95rem; }
+
+  /* Aufgeräumte Hero: nur ein Bild (Roland & Tanja-Seite), weniger Text */
+  .hero-bg { grid-template-columns: 1fr; }
+  .hero-bg-left { display:none; }
+  .hero-bg-right { background-position: center; }
+  .hero-bg-left::after { display:none; }
+  .hero-eyebrow { font-size:0.62rem; margin-bottom:0.9rem; }
+  .hero h1 { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+  .hero-sub { display:none; }
+  .hero-labels { display:none; }
+  .hero-content { padding:1.5rem; }
+
   .phil-grid, .stuten-header, .fohlen-grid, .partner-grid, .ueber-grid, .kontakt-grid { grid-template-columns:1fr; }
   .stuten-grid { grid-template-columns:1fr 1fr; }
   .erfolge-list { grid-template-columns:1fr; }
   .phil-pillars { grid-template-columns:1fr; }
-  .nav-links { display:none; }
-  .erfolge-highlight { flex-direction:column; gap:1rem; }
+  .erfolge-highlight { flex-direction:column; gap:1rem; text-align:center; }
+  .erfolge-big { justify-content:center; }
   .erfolge-allegra { grid-template-columns:1fr; }
+  .kontakt-top { grid-template-columns:1fr; }
+  .kontakt-bottom-row { grid-template-columns:1fr; }
+
+  /* Zeitstrahl mobil: Linie links, Text sauber zentriert im eigenen Feld */
   .tl-wrap::before { left:1.25rem; }
   .tl-entry { grid-template-columns:2.5rem 1fr; }
   .tl-entry.img-left .tl-img-side, .tl-entry.img-right .tl-img-side { display:none; }
-  .tl-entry.img-left .tl-text-side, .tl-entry.img-right .tl-text-side { order:2; padding:0 0 0 1rem; text-align:left; }
+  .tl-entry.img-left .tl-text-side, .tl-entry.img-right .tl-text-side {
+    order:2; padding:0 0.5rem 0 1rem; text-align:left;
+    opacity:1 !important; transform:none !important;
+  }
   .tl-entry.img-left .tl-center, .tl-entry.img-right .tl-center { order:1; }
-  .hero-labels { padding:0 1rem; }
+  .tl-entry.img-right .tl-detail { border-right:none; border-left:2px solid #e0ccaa; }
+}
+
+/* Querformat Handy: gleiche (Hochkant-)Logik erzwingen */
+@media (max-width: 932px) and (orientation: landscape) and (pointer: coarse) {
+  .hero-bg { grid-template-columns: 1fr; }
+  .hero-bg-left { display:none; }
+  .hero-sub, .hero-labels { display:none; }
+  .nav-burger { display:flex; }
+  .nav-links {
+    position:fixed; top:3.75rem; left:0; right:0;
+    background:rgba(253,248,242,0.99); border-bottom:1px solid #e0ccaa;
+    flex-direction:column; gap:0; padding:0.5rem 0;
+    transform:translateY(-130%); transition:transform 0.35s ease; z-index:99;
+  }
+  .nav-links.open { transform:translateY(0); display:flex; }
+  .nav-links a { padding:0.7rem 1.5rem; border-bottom:1px solid #f0e2cc; }
+  .stuten-grid { grid-template-columns:1fr 1fr; }
 }
 </style>
 </head>
@@ -276,14 +361,17 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
 
 <nav>
   <div class="nav-logo">Haflingerhof <span>Roland Müller</span></div>
-  <div class="nav-links">
-    <a href="#philosophie">Philosophie</a>
-    <a href="#geschichte">Geschichte</a>
-    <a href="#stuten">Zuchtstuten</a>
-    <a href="#erfolge">Erfolge</a>
-    <a href="#partner">Partnerschaften</a>
-    <a href="#kontakt">Kontakt</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#philosophie" onclick="closeNav()">Philosophie</a>
+    <a href="#geschichte" onclick="closeNav()">Geschichte</a>
+    <a href="#stuten" onclick="closeNav()">Zuchtstuten</a>
+    <a href="#erfolge" onclick="closeNav()">Erfolge</a>
+    <a href="#partner" onclick="closeNav()">Partnerschaften</a>
+    <a href="#kontakt" onclick="closeNav()">Kontakt</a>
   </div>
+  <button class="nav-burger" id="navBurger" onclick="toggleNav()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <header class="hero">
@@ -339,9 +427,9 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     </div>
     <div class="tl-wrap">
 
-      <div class="tl-entry img-left reveal">
+      <div class="tl-entry img-left">
         <div class="tl-img-side">
-          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra.png" alt="Haflingerstute Afra – Gründerstute der A-Linie" style="object-position:70% center;" loading="lazy">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra%20close%20up.jpg" alt="Haflingerstute Afra – Gründerstute der A-Linie, Nahaufnahme" loading="lazy">
           <div class="tl-img-caption">Afra – Gründerstute der A-Linie</div>
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
@@ -352,7 +440,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
       </div>
 
-      <div class="tl-entry img-right reveal">
+      <div class="tl-entry img-right">
         <div class="tl-text-side">
           <div class="tl-year">Die ersten Erfolge</div>
           <div class="tl-title">Zusammenarbeit mit Familie Föge</div>
@@ -360,12 +448,12 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
         <div class="tl-img-side">
-          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/Maika%202012.png" alt="Haflingerstute Maika 2012, Staatsprämiensiegerin, mit Hein-Dieter Föge" style="object-fit:cover; width:100%; aspect-ratio:3/4; display:block;" loading="lazy">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/Maika%202012.png" alt="Haflingerstute Maika 2012, Staatsprämiensiegerin, mit Hein-Dieter Föge" loading="lazy">
           <div class="tl-img-caption">Maika 2012 – Staatsprämie Siegerin, mit Hein-Dieter Föge</div>
         </div>
       </div>
 
-      <div class="tl-entry img-left reveal">
+      <div class="tl-entry img-left">
         <div class="tl-img-side">
           <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/melinda%202009.png" alt="Haflingerstute Melinda, Tochter der Marnie, Verbandsprämie und Elitestute" loading="lazy">
           <div class="tl-img-caption">Melinda – Tochter der Marnie, Verbandsprämie · Elitestute</div>
@@ -379,7 +467,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
       </div>
 
-      <div class="tl-entry img-right reveal">
+      <div class="tl-entry img-right">
         <div class="tl-text-side">
           <div class="tl-year">1997 – Ein besonderer Moment</div>
           <div class="tl-title">Marnie auf der Europameisterschaft in Aachen</div>
@@ -392,7 +480,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
       </div>
 
-      <div class="tl-entry img-left reveal">
+      <div class="tl-entry img-left">
         <div class="tl-img-side landscape">
           <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/l%20melissa%20r%20maiglo%CC%88ckchen%20m%20melinda.jpeg" alt="Landesponyschau 2022 – Roland Müller mit Jürgen Kolodinski und Stuten Melissa, Maiglöckchen, Melinda" loading="lazy">
           <div class="tl-img-caption">Landesponyschau 2022 – Roland Müller (Mitte), Jürgen Kolodinski (rechts)</div>
@@ -405,16 +493,16 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
       </div>
 
-      <div class="tl-entry img-right reveal">
+      <div class="tl-entry img-right">
         <div class="tl-text-side">
           <div class="tl-year">Heute</div>
-          <div class="tl-title">Vierte und fünfte Generation – aus eigener Zucht</div>
+          <div class="tl-title">Zucht in zweiter Generation – aus eigener Zucht</div>
           <div class="tl-text">Heute werden beide Linien in Generationen aus Stuten weitergezüchtet, die allesamt im eigenen Betrieb geboren wurden. Über 100 Fohlen hat die Zucht Roland Müller in diesen Jahrzehnten hervorgebracht.</div>
           <div class="tl-detail"><strong>Die A-Linie heute:</strong> Aus Afra kam Asta, aus Asta folgten Annabel und Allegra – die A-Linie befindet sich damit in der vierten Generation. Mit Allegra als Staatsprämienanwärterin beginnt bereits die fünfte Generation dieser ältesten Linie der Zucht.<br><br><strong>Die M-Linie heute:</strong> Marnie begründete die Linie, aus ihr folgten Töchter wie Melinda und Melissa, deren Nachkommen wie Müri und Mia heute als Zuchtstuten aktiv sind – die M-Linie befindet sich in der dritten Generation.</div>
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
         <div class="tl-img-side">
-          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/allegra%20close%20up%202.jpg" alt="Haflingerstute Allegra 2026, Staatsprämienanwärterin der vierten Generation" style="object-fit:contain; background:#f7efe3; width:100%; aspect-ratio:3/4; display:block; border:1px solid #e0ccaa;" loading="lazy">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/allegra%20close%20up%202.jpg" alt="Haflingerstute Allegra 2026, Staatsprämienanwärterin der vierten Generation" style="background:#f7efe3;" loading="lazy">
           <div class="tl-img-caption">Allegra 2026 – Staatsprämienanwärterin, vierte Generation</div>
         </div>
       </div>
@@ -480,12 +568,13 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     <h2>Fohlenjahrgang 2026</h2>
     <div class="fohlen-grid">
       <div class="fohlen-img-wrap">
-        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/asta%20in%20der%20mitte%20neben%20dem%20fohlen%20rechts%2C%202.%20pferd%20von%20links%20afra.jpg" alt="Haflingerherde mit Fohlen auf der Weide" loading="lazy">
+        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/melodie%20fohlen.png" alt="Haflinger-Stutfohlen Melodie, geboren 2025, Mutter Maria, Vater Barclay" loading="lazy">
         <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/mu%CC%88ri.jpeg" alt="Haflingerstute Müri" loading="lazy">
         <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/mia.jpeg" alt="Haflingerstute Mia" loading="lazy">
       </div>
       <div>
-        <p class="prose">2026 brachten unsere Stuten wieder Nachwuchs: <strong>Mariposa</strong> aus Maria und <strong>Maila</strong> aus Mia ergänzen die Zucht um zwei neue Stutfohlen – beide aus der bewährten M-Linie, beide bei uns geboren.</p>
+        <p class="prose">Unser jüngstes Stutfohlen <strong>Melodie</strong> (geb. 2025) stammt aus unserer <strong>Maria</strong>, Vater ist <strong>Barclay</strong>. Bei der letzten Fohleneintragung in Päse belegte sie den ersten Platz.</p>
+        <p class="prose" style="margin-top:1rem;">2026 brachten unsere Stuten erneut Nachwuchs: <strong>Mariposa</strong> aus Maria und <strong>Maila</strong> aus Mia ergänzen die Zucht um zwei weitere Stutfohlen – beide aus der bewährten M-Linie, beide bei uns geboren.</p>
         <p class="prose" style="margin-top:1rem;">Jedes Jahr erwarten wir rund sechs Fohlen, die auf weitläufigen Weiden in natürlicher Herdengemeinschaft aufwachsen. Hengstfohlen geben wir spätestens nach drei Jahren ab. Der Fokus liegt auf der Fortführung unserer eigenen Stutenlinie.</p>
         <p class="prose" style="margin-top:1rem;">Aktuelle Informationen zu Verkaufstieren gerne auf persönliche Anfrage.</p>
       </div>
@@ -501,7 +590,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     <h2>Jahrzehnte gelebter<br>Zuchtqualität</h2>
     <p class="prose" style="margin-bottom:2.5rem;">Die Ergebnisse unserer Zucht sprechen für sich – nicht durch Selbstdarstellung, sondern durch eine lange Geschichte regelmäßiger Teilnahmen und Auszeichnungen.</p>
     <div class="erfolge-highlight">
-      <div class="erfolge-big">136</div>
+      <div class="erfolge-big" id="erfolgeBig"><span class="digit">1</span><span class="digit">3</span><span class="digit">6</span></div>
       <div class="erfolge-big-label"><strong>Gezüchtete Fohlen</strong>Über vier Jahrzehnte hinweg sind 136 Haflinger aus der Zucht Roland Müller hervorgegangen – alle aus eigenen Stuten, mit sorgfältig gewählter Abstammung.</div>
     </div>
     <div class="erfolge-list">
@@ -511,7 +600,9 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
       <div class="erfolg-item"><div class="erfolg-cat">Vierte Zuchtgeneration</div><div class="erfolg-text">Alle heutigen Zuchtstuten stammen aus eigener Zucht – eine Kontinuität über mehrere Generationen, die zeigt, dass unser Ansatz trägt.</div></div>
     </div>
     <div class="erfolge-allegra">
-      <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/alegra%20hochformat.jpg" alt="Haflingerstute Allegra 2026, Staatsprämienanwärterin" loading="lazy">
+      <div class="ea-img-wrap">
+        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/alegra%20hochformat.jpg" alt="Haflingerstute Allegra 2026, Staatsprämienanwärterin" loading="lazy">
+      </div>
       <div class="erfolge-allegra-text">
         <div class="erfolg-cat">Aktuell · Staatsprämienauswahl 2026</div>
         <h3>Allegra – Staatsprämienanwärterin</h3>
@@ -563,8 +654,8 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         <p class="prose" style="margin-top:1rem;">Roland Müller ist seit Jahrzehnten aktives Mitglied im Verband der Pony- und Kleinpferdezüchter Hannover.</p>
         <div class="verband-badge"><div class="verband-dot"></div>Mitglied im Verband der Pony- und Kleinpferdezüchter Hannover seit 1988</div>
       </div>
-      <div class="ueber-img" style="border:none;">
-        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/allegra%20roland%20mu%CC%88ller.jpg" alt="Roland Müller mit Haflingerstute Allegra 2026" style="object-fit:contain; background:#fdf8f2;" loading="lazy">
+      <div class="ueber-img">
+        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/allegra%20roland%20mu%CC%88ller.jpg" alt="Roland Müller mit Haflingerstute Allegra 2026" loading="lazy">
         <p style="font-family:Arial,sans-serif;font-size:0.75rem;color:#9c7d5c;font-style:italic;margin-top:0.5rem;text-align:center;">Allegra 2026 – Staatsprämienanwärterin, vierte Generation</p>
       </div>
     </div>
@@ -599,17 +690,23 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         <div class="kontakt-note">
           Rufen Sie uns gerne an oder schreiben Sie eine E-Mail – der persönliche Kontakt ist uns wichtig. Wir vereinbaren gerne einen Termin, damit Sie unsere Pferde vor Ort kennenlernen können. Bei allen anderen Anliegen rund um unsere Zucht melden Sie sich ebenso gerne bei uns.
         </div>
-        <div class="kontakt-form" id="kontaktForm">
-          <input type="text" id="kf-name" placeholder="Ihr Name">
-          <input type="email" id="kf-email" placeholder="Ihre E-Mail">
-          <input type="text" id="kf-subject" placeholder="Betreff">
-          <textarea id="kf-message" placeholder="Ihre Nachricht ..."></textarea>
+        <!-- ===== Formspree-Formular =====
+             SO AKTIVIERST DU ES:
+             1. Konto auf formspree.io anlegen, Formular mit Muellerroland2016@gmail.com verknüpfen
+             2. Deine Form-ID (z.B. xeqwabcd) unten bei action eintragen
+             Solange DEINE_FORM_ID drinsteht, läuft es im Demo-Modus (öffnet Mailprogramm). -->
+        <form class="kontakt-form" id="kontaktForm" action="https://formspree.io/f/DEINE_FORM_ID" method="POST">
+          <input type="text" name="name" id="kf-name" placeholder="Ihr Name" required>
+          <input type="email" name="email" id="kf-email" placeholder="Ihre E-Mail" required>
+          <input type="text" name="betreff" id="kf-subject" placeholder="Betreff">
+          <textarea name="nachricht" id="kf-message" placeholder="Ihre Nachricht ..." required></textarea>
           <label class="form-consent">
-            <input type="checkbox" id="kf-consent">
+            <input type="checkbox" id="kf-consent" required>
             <span>Ich habe die <a href="#" onclick="openModal('datenschutz');return false;">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage einverstanden.</span>
           </label>
-          <button onclick="submitForm()">Nachricht senden</button>
-        </div>
+          <button type="submit">Nachricht senden</button>
+          <div class="form-status" id="formStatus"></div>
+        </form>
       </div>
     </div>
   </div>
@@ -681,8 +778,8 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     </p>
     <br>
     <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
-      <strong style="color:#f5e6cc;">Kontaktaufnahme</strong><br>
-      Wenn Sie uns über das Kontaktformular, per E-Mail oder Telefon kontaktieren, werden Ihre Angaben (Name, E-Mail-Adresse, Nachricht) zur Bearbeitung Ihrer Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a und f DSGVO. Diese Daten werden nicht an Dritte weitergegeben und nach abschließender Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.
+      <strong style="color:#f5e6cc;">Kontaktaufnahme &amp; Kontaktformular</strong><br>
+      Wenn Sie uns über das Kontaktformular, per E-Mail oder Telefon kontaktieren, werden Ihre Angaben (Name, E-Mail-Adresse, Nachricht) zur Bearbeitung Ihrer Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a und f DSGVO. Das Kontaktformular wird über den Dienst Formspree (Formspree Inc., USA) verarbeitet; dabei kann eine Übermittlung in die USA erfolgen. Ihre Daten werden nicht zu Werbezwecken weitergegeben und nach abschließender Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.
     </p>
     <br>
     <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
@@ -718,8 +815,16 @@ function closeModal(id) {
     inner.classList.remove('closing');
   }, 280);
 }
-function openModal(id) {
-  document.getElementById(id).style.display = 'block';
+function openModal(id) { document.getElementById(id).style.display = 'block'; }
+
+/* ===== Mobile Navigation (Burger) ===== */
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navBurger').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navBurger').classList.remove('open');
 }
 
 /* ===== Google Maps Zwei-Klick (DSGVO) ===== */
@@ -728,25 +833,62 @@ function loadMap() {
   c.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.87703055213!2d10.625806376730681!3d52.62606627208913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47afc3bbd8f07cef%3A0x307d76f3aaf50d97!2sRietberg%208%2C%2029396%20Sch%C3%B6new%C3%B6rde!5e1!3m2!1sde!2sde!4v1781779532965!5m2!1sde!2sde" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort Haflingerhof Roland Müller"></iframe>';
 }
 
-/* ===== Kontaktformular (öffnet vorausgefüllte E-Mail) ===== */
-function submitForm() {
-  const name = document.getElementById('kf-name').value.trim();
-  const email = document.getElementById('kf-email').value.trim();
-  const subject = document.getElementById('kf-subject').value.trim();
-  const message = document.getElementById('kf-message').value.trim();
+/* ===== Kontaktformular: Formspree (mit Demo-Fallback) ===== */
+const formEl = document.getElementById('kontaktForm');
+formEl.addEventListener('submit', async function (e) {
+  const status = document.getElementById('formStatus');
   const consent = document.getElementById('kf-consent').checked;
-  if (!name || !email || !message) { alert('Bitte füllen Sie Name, E-Mail und Nachricht aus.'); return; }
-  if (!consent) { alert('Bitte bestätigen Sie die Datenschutzerklärung.'); return; }
-  const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\n\n' + message);
-  const subj = encodeURIComponent(subject || 'Anfrage über die Website');
-  window.location.href = 'mailto:Muellerroland2016@gmail.com?subject=' + subj + '&body=' + body;
-}
+  if (!consent) { e.preventDefault(); status.style.color = '#e0a89a'; status.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.'; return; }
 
-/* ===== Scroll-Reveal ===== */
+  // Demo-Modus, solange keine echte Form-ID hinterlegt ist
+  if (formEl.action.indexOf('DEINE_FORM_ID') !== -1) {
+    e.preventDefault();
+    const name = document.getElementById('kf-name').value.trim();
+    const email = document.getElementById('kf-email').value.trim();
+    const subject = document.getElementById('kf-subject').value.trim();
+    const message = document.getElementById('kf-message').value.trim();
+    if (!name || !email || !message) { status.style.color = '#e0a89a'; status.textContent = 'Bitte Name, E-Mail und Nachricht ausfüllen.'; return; }
+    const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\n\n' + message);
+    window.location.href = 'mailto:Muellerroland2016@gmail.com?subject=' + encodeURIComponent(subject || 'Anfrage über die Website') + '&body=' + body;
+    return;
+  }
+
+  // Echter Formspree-Versand (AJAX, ohne Seitenwechsel)
+  e.preventDefault();
+  status.style.color = '#d4b896'; status.textContent = 'Wird gesendet ...';
+  try {
+    const res = await fetch(formEl.action, { method: 'POST', body: new FormData(formEl), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { status.style.color = '#9bd09b'; status.textContent = 'Danke für Ihre Nachricht! Wir melden uns zeitnah bei Ihnen.'; formEl.reset(); }
+    else { status.style.color = '#e0a89a'; status.textContent = 'Es gab ein Problem. Bitte per E-Mail versuchen.'; }
+  } catch (err) {
+    status.style.color = '#e0a89a'; status.textContent = 'Es gab ein Problem. Bitte per E-Mail versuchen.';
+  }
+});
+
+/* ===== Scroll-Reveal (Sektionen) ===== */
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ===== Zeitstrahl-Einträge einzeln einblenden ===== */
+const tlIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); tlIo.unobserve(e.target); } });
+}, { threshold: 0.2 });
+document.querySelectorAll('.tl-entry').forEach(el => tlIo.observe(el));
+
+/* ===== Zahl-Fall-Animation (136) ===== */
+const big = document.getElementById('erfolgeBig');
+const bigIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('animate'); bigIo.unobserve(e.target); }
+  });
+}, { threshold: 0.6 });
+if (big) bigIo.observe(big);
+// Auch beim Sprung über die Kopfzeile sicher auslösen
+document.querySelectorAll('a[href="#erfolge"]').forEach(a => {
+  a.addEventListener('click', () => { setTimeout(() => { if (big) big.classList.add('animate'); }, 600); });
+});
 
 /* ===== Lightbox ===== */
 function openLightbox(src, alt) {
@@ -756,7 +898,7 @@ function openLightbox(src, alt) {
   lb.classList.add('open');
 }
 function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
-document.querySelectorAll('.stute-img, .fohlen-img-wrap img').forEach(img => {
+document.querySelectorAll('.stute-img, .fohlen-img-wrap img, .tl-img-side img, .erfolge-allegra img').forEach(img => {
   img.addEventListener('click', () => openLightbox(img.src, img.alt));
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
