@@ -1,4 +1,4 @@
-<div class="tl-text">In den frühen Jahren war die Zusammenarbeit mit <strong>Hein-Dieter und Gunda Föge</strong> aus Warpe entscheidend. Zu ihren Hengsten wurden die Stuten gebracht – und Familie Föge bereitete unsere Stuten, darunter <strong>Asta</strong>, <strong>Melinda</strong> und <strong>Maika</strong> (Staatsprämiensiegerin), auf die Staatsprämienauswahlen vor. Die Verbindung zeigte sich auch 2013, als der bei Roland Müller gezüchtete Hengst <strong>Akomet (v. Antares-Stratho, aus unserer Marnie)</strong> bei der Körung in der Verdener Niedersachsenhalle erfolgreich gekört wurde – gehalte<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 <title>Haflingerzucht Schönewörde – Haflingerhof Roland Müller, Niedersachsen</title>
 <meta name="description" content="Haflingerhof Roland Müller in Schönewörde, Niedersachsen: naturnahe Haflingerzucht seit über 40 Jahren. Zuchtstuten aus eigener Linie, Staatsprämienstuten und Fohlen aus eigener Aufzucht.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://maximilianmueller257-png.github.io/HaflingerhofRolandM-ller/">
+<link rel="canonical" href="https://haflingerhof-mueller.de/">
 <meta name="author" content="Roland Müller">
 <meta name="geo.region" content="DE-NI">
 <meta name="geo.placename" content="Schönewörde">
@@ -18,7 +18,7 @@
 <meta property="og:title" content="Haflingerhof Roland Müller – Haflingerzucht in Schönewörde">
 <meta property="og:description" content="Naturnahe Haflingerzucht seit über 40 Jahren in Niedersachsen. Zuchtstuten aus eigener Linie, Staatsprämienstuten und Fohlen aus eigener Aufzucht.">
 <meta property="og:image" content="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/marnie2.jpg">
-<meta property="og:url" content="https://maximilianmueller257-png.github.io/HaflingerhofRolandM-ller/">
+<meta property="og:url" content="https://haflingerhof-mueller.de/">
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -32,7 +32,7 @@
   "@type": "LocalBusiness",
   "name": "Haflingerhof Roland Müller",
   "description": "Naturnahe Haflingerzucht seit über 40 Jahren in Schönewörde, Niedersachsen. Zuchtstuten aus eigener Linie und Fohlen aus eigener Aufzucht.",
-  "url": "https://maximilianmueller257-png.github.io/HaflingerhofRolandM-ller/",
+  "url": "https://haflingerhof-mueller.de/",
   "telephone": "+49 159 06186617",
   "email": "Muellerroland2016@gmail.com",
   "image": "https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/marnie2.jpg",
@@ -194,12 +194,14 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .tl-entry.img-right .tl-detail { border-left:none; border-right:2px solid #e0ccaa; }
 
 /* Zeitstrahl: subtiles Einblenden von links/rechts beim Scrollen */
-.tl-entry .tl-img-side, .tl-entry .tl-text-side { opacity:0; transition: opacity 0.7s ease, transform 0.7s ease; }
+.tl-entry .tl-img-side, .tl-entry .tl-text-side { opacity:0; transition: opacity 0.7s ease, transform 0.7s ease; will-change: opacity, transform; }
 .tl-entry.img-left  .tl-img-side  { transform: translateX(-28px); }
 .tl-entry.img-left  .tl-text-side { transform: translateX(28px); }
 .tl-entry.img-right .tl-text-side { transform: translateX(-28px); }
 .tl-entry.img-right .tl-img-side  { transform: translateX(28px); }
 .tl-entry.visible .tl-img-side, .tl-entry.visible .tl-text-side { opacity:1; transform: translateX(0); }
+/* Verhindert Aufblitzen oben vor JS-Start: erstes Element nach Laden zeigen wenn JS aus */
+.no-js .tl-entry .tl-img-side, .no-js .tl-entry .tl-text-side { opacity:1; transform:none; }
 
 /* ZUCHTSTUTEN */
 .stuten { background: #fdf8f2; }
@@ -336,7 +338,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   /* Aufgeräumte Hero: nur ein Bild (Roland & Tanja-Seite), weniger Text */
   .hero-bg { grid-template-columns: 1fr; }
   .hero-bg-left { display:none; }
-  .hero-bg-right { background-position: center; background-size: contain; background-color:#1f1206; transition:none; }
+  .hero-bg-right { background-position: center; background-size: 125%; background-color:#1f1206; transition:none; }
   .hero-bg-left::after { display:none; }
   .hero { height: calc(100vh - 3.75rem); }
   .hero-eyebrow { font-size:0.62rem; margin-bottom:0.9rem; }
@@ -367,6 +369,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     display:block;
     padding-left:2.75rem;
     position:relative;
+    overflow:hidden;
   }
   .tl-entry .tl-center {
     position:absolute; left:0; top:0; width:2.5rem;
@@ -488,7 +491,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
 
       <div class="tl-entry img-left">
         <div class="tl-img-side">
-          <img class="tl-img-afra" src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra%20close%20up.jpg" alt="Haflingerstute Afra – Gründerstute der A-Linie" style="object-position:35% center;" loading="lazy">
+          <img class="tl-img-afra" src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra%20close%20up.jpg" alt="Haflingerstute Afra – Gründerstute der A-Linie" style="object-position:45% center;" loading="lazy">
           <div class="tl-img-caption">Afra – Gründerstute der A-Linie</div>
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
@@ -503,7 +506,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         <div class="tl-text-side">
           <div class="tl-year">Die ersten Erfolge</div>
           <div class="tl-title">Zusammenarbeit mit Familie Föge</div>
-          <div class="tl-text">In den frühen Jahren war die Zusammenarbeit mit <strong>Hein-Dieter und Gunda Föge</strong> aus Warpe entscheidend. Zu ihren Hengsten wurden die Stuten gebracht – und Familie Föge bereitete unsere Stuten, darunter <strong>Asta</strong> und <strong>Melinda</strong>, auf die Staatsprämienauswahlen vor. Die Verbindung zeigte sich auch 2013, als der bei Roland Müller gezüchtete Hengst <strong>Akomet (v. Antares-Stratho, aus unserer Marnie)</strong> bei der Körung in der Verdener Niedersachsenhalle erfolgreich gekört wurde – gehalten von Familie Föge.</div>
+          <div class="tl-text">In den frühen Jahren war die Zusammenarbeit mit <strong>Hein-Dieter und Gunda Föge</strong> aus Warpe entscheidend. Zu ihren Hengsten wurden die Stuten gebracht – und Familie Föge bereitete unsere Stuten, darunter <strong>Asta</strong>, <strong>Melinda</strong> und <strong>Maika</strong> (Staatsprämiensiegerin), auf die Staatsprämienauswahlen vor. Die Verbindung zeigte sich auch 2013, als der bei Roland Müller gezüchtete Hengst <strong>Akomet (v. Antares-Stratho, aus unserer Marnie)</strong> bei der Körung in der Verdener Niedersachsenhalle erfolgreich gekört wurde – gehalten von Familie Föge.</div>
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
         <div class="tl-img-side">
