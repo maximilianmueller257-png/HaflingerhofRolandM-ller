@@ -296,7 +296,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
 <body>
 
 <nav>
-  <div class="nav-logo">Haflingerhof <span>Roland Müller</span></div>
+  <a href="#" style="text-decoration:none;"><div class="nav-logo">Haflingerhof <span>Roland Müller</span></div></a>
   <div class="nav-links" id="navLinks">
     <a href="#philosophie" onclick="closeNav()">Philosophie</a>
     <a href="#geschichte" onclick="closeNav()">Geschichte</a>
@@ -346,7 +346,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         <div class="phil-img">
           <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/asta%20in%20der%20mitte%20neben%20dem%20fohlen%20rechts%2C%202.%20pferd%20von%20links%20afra.jpg" alt="Haflingerherde auf der Weide" loading="lazy">
         </div>
-        <div class="phil-img-caption">Die Herde – Marnie (2. v. l.), Asta (Mitte)</div>
+        <div class="phil-img-caption">v. l.: Maxima, Marnie, Asta (Mitte), Maiglöckchen, Melinda (dahinter)</div>
       </div>
     </div>
   </div>
@@ -410,7 +410,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         <div class="tl-center"><div class="tl-dot"></div></div>
         <div class="tl-img-side landscape">
           <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/die%20herde.jpg" alt="Haflingerherde auf der Weide" loading="lazy">
-          <div class="tl-img-caption">Die Herde – Marnie (2. v. l.), Asta (Mitte)</div>
+          <div class="tl-img-caption">v. l.: Maxima, Marnie, Asta (Mitte), Maiglöckchen, Melinda (dahinter)</div>
         </div>
       </div>
       <div class="tl-entry img-left">
@@ -588,7 +588,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         </div>
         <div class="kontakt-map" id="mapContainer">
           <div class="map-consent" id="mapConsent">
-            <p>Hier finden Sie unseren Standort auf einer Google-Karte. Beim Laden werden Daten an Google übertragen.</p>
+            <p>Hier finden Sie unseren Standort auf einer Google-Karte. Beim Laden werden <a href="#" onclick="openModal('datenschutz');return false;" style="color:#c89a5a;text-decoration:underline;">Daten</a> an Google übertragen.</p>
             <button onclick="loadMap()">Karte laden</button>
           </div>
         </div>
@@ -604,7 +604,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
           <textarea name="nachricht" id="kf-message" placeholder="Ihre Nachricht ..." required></textarea>
           <label class="form-consent">
             <input type="checkbox" id="kf-consent" required>
-            <span>Ich habe die Datenschutzerklärung gelesen und bin mit der Verarbeitung einverstanden.</span>
+            <span>Ich habe die <a href="#" onclick="openModal('datenschutz');return false;" style="color:#c89a5a;text-decoration:underline;">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung einverstanden.</span>
           </label>
           <button type="button" onclick="submitForm()">Nachricht senden</button>
           <div class="form-status" id="formStatus"></div>
@@ -624,6 +624,40 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   </div>
 </div>
 
+<!-- DATENSCHUTZ MODAL -->
+<div id="datenschutz" style="display:none; position:fixed; inset:0; background:rgba(30,15,3,0.85); z-index:1000; overflow-y:auto; padding:2rem; backdrop-filter:blur(4px);">
+  <div style="max-width:680px; margin:2rem auto; background:#3e2810; border:1px solid #e0ccaa; padding:3rem; position:relative;" class="modal-inner">
+    <button onclick="closeModal('datenschutz')" style="position:absolute;top:1rem;right:1.5rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#c89a5a;">✕</button>
+    <div style="font-family:Arial,sans-serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#c89a5a;margin-bottom:0.6rem;">Rechtliches</div>
+    <h2 style="font-family:Georgia,serif;font-weight:normal;color:#f5e6cc;margin-bottom:2rem;font-size:1.5rem;">Datenschutzerklärung</h2>
+    <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
+      <strong style="color:#f5e6cc;">Verantwortlicher</strong><br>
+      Roland Müller, Rietberg 8, 29396 Schönewörde<br>
+      E-Mail: Muellerroland2016@gmail.com
+    </p>
+    <br>
+    <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
+      <strong style="color:#f5e6cc;">Allgemeines</strong><br>
+      Der Schutz Ihrer personenbezogenen Daten ist uns wichtig. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TDDDG). Diese Website wird über GitHub Pages bereitgestellt; dabei kann der Hosting-Anbieter technisch notwendige Server-Logdaten (z. B. IP-Adresse) verarbeiten.
+    </p>
+    <br>
+    <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
+      <strong style="color:#f5e6cc;">Kontaktaufnahme &amp; Kontaktformular</strong><br>
+      Wenn Sie uns über das Kontaktformular, per E-Mail oder Telefon kontaktieren, werden Ihre Angaben (Name, E-Mail-Adresse, Nachricht) zur Bearbeitung Ihrer Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a und f DSGVO. Das Kontaktformular wird über den Dienst Formspree (Formspree Inc., USA) verarbeitet; dabei kann eine Übermittlung in die USA erfolgen. Ihre Daten werden nicht zu Werbezwecken weitergegeben und nach abschließender Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.
+    </p>
+    <br>
+    <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
+      <strong style="color:#f5e6cc;">Google Maps</strong><br>
+      Diese Website nutzt Google Maps zur Darstellung einer Karte. Die Karte wird erst nach Ihrer ausdrücklichen Einwilligung (Klick auf „Karte laden") geladen. Erst dann werden Daten – insbesondere Ihre IP-Adresse – an Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, übertragen. Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO.
+    </p>
+    <br>
+    <p style="font-family:Arial,sans-serif;font-size:0.88rem;color:#d4b896;line-height:1.8;">
+      <strong style="color:#f5e6cc;">Ihre Rechte</strong><br>
+      Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem steht Ihnen ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu. Wenden Sie sich dazu jederzeit an uns unter den oben genannten Kontaktdaten.
+    </p>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
@@ -635,7 +669,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
   <span class="footer-sep"> · </span>
   <span class="footer-line">Rietberg 8, 29396 Schönewörde</span>
   <span class="footer-sep"> · </span>
-  <span class="footer-line"><a href="#" onclick="openModal('impressum');return false;" style="color:#9c7d5c;text-decoration:none;">Impressum</a></span>
+  <span class="footer-line"><a href="#" onclick="openModal('impressum');return false;" style="color:#9c7d5c;text-decoration:none;">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="openModal('datenschutz');return false;" style="color:#9c7d5c;text-decoration:none;">Datenschutz</a></span>
 </footer>
 
 <script>
