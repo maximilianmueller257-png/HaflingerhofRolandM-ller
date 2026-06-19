@@ -147,7 +147,8 @@ h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: normal; color: #5c3e
 .philosophy { background: #fdf8f2; }
 .phil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
 .phil-img { width:100%; aspect-ratio: 16/9; overflow:hidden; border: 1px solid #e0ccaa; }
-.phil-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.phil-img img { width:100%; height:100%; object-fit:cover; display:block; cursor:pointer; transition: transform 0.45s ease; }
+.phil-img img:hover { transform: scale(1.06); }
 .phil-img-caption { font-family:Arial,sans-serif; font-size:0.7rem; color:#a08060; margin-top:0.4rem; font-style:italic; }
 .phil-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
 .pillar { border-left: 2px solid #c89a5a; padding-left: 1rem; }
@@ -459,10 +460,12 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
           <div class="pillar"><div class="pillar-title">Die Arbeit im Fokus</div><div class="pillar-text">Die Leidenschaft für die Zucht steht im Vordergrund – nicht der kommerzielle Erfolg</div></div>
         </div>
       </div>
-      <div class="phil-img">
-        <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/asta%20in%20der%20mitte%20neben%20dem%20fohlen%20rechts%2C%202.%20pferd%20von%20links%20afra.jpg" alt="Haflingerherde auf der Weide – Stute Marnie und Asta mit Fohlen" loading="lazy">
+      <div>
+        <div class="phil-img">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/asta%20in%20der%20mitte%20neben%20dem%20fohlen%20rechts%2C%202.%20pferd%20von%20links%20afra.jpg" alt="Haflingerherde auf der Weide – Stute Marnie und Asta mit Fohlen" loading="lazy">
+        </div>
+        <div class="phil-img-caption">Die Herde – Marnie (2. v. l.), Asta (Mitte)</div>
       </div>
-      <div class="phil-img-caption">Die Herde – Marnie (2. v. l.), Asta (Mitte)</div>
     </div>
   </div>
 </section>
@@ -482,7 +485,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
 
       <div class="tl-entry img-left">
         <div class="tl-img-side">
-          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra.png" alt="Haflingerstute Afra – Gründerstute der A-Linie" style="object-position:70% center;" loading="lazy">
+          <img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/afra%20close%20up.jpg" alt="Haflingerstute Afra – Gründerstute der A-Linie" style="object-position:70% center;" loading="lazy">
           <div class="tl-img-caption">Afra – Gründerstute der A-Linie</div>
         </div>
         <div class="tl-center"><div class="tl-dot"></div></div>
@@ -951,7 +954,7 @@ function openLightbox(src, alt) {
   lb.classList.add('open');
 }
 function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
-document.querySelectorAll('.stute-img, .fohlen-img-wrap img, .tl-img-side img, .erfolge-allegra img').forEach(img => {
+document.querySelectorAll('.stute-img, .fohlen-img-wrap img, .tl-img-side img, .erfolge-allegra img, .phil-img img').forEach(img => {
   img.addEventListener('click', () => openLightbox(img.src, img.alt));
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
