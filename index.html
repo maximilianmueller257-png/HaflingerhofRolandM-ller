@@ -606,7 +606,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
         <div class="kontakt-note">
           Rufen Sie uns gerne an oder schreiben Sie eine E-Mail – der persönliche Kontakt ist uns wichtig. Wir vereinbaren gerne einen Termin, damit Sie unsere Pferde vor Ort kennenlernen können.
         </div>
-        <form class="kontakt-form" id="kontaktForm">
+        <form class="kontakt-form" id="kontaktForm" action="https://formspree.io/f/xkolwyne" method="POST">
           <input type="text" name="name" id="kf-name" placeholder="Ihr Name" required>
           <input type="email" name="email" id="kf-email" placeholder="Ihre E-Mail" required>
           <input type="text" name="betreff" id="kf-subject" placeholder="Betreff">
@@ -703,18 +703,21 @@ function loadMap() {
   c.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.87703055213!2d10.625806376730681!3d52.62606627208913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47afc3bbd8f07cef%3A0x307d76f3aaf50d97!2sRietberg%208%2C%2029396%20Sch%C3%B6new%C3%B6rde!5e1!3m2!1sde!2sde!4v1781779532965!5m2!1sde!2sde" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort Haflingerhof Roland Müller"></iframe>';
 }
 
-function submitForm() {
+const formEl = document.getElementById('kontaktForm');
+formEl.addEventListener('submit', async function(e) {
+  e.preventDefault();
   const status = document.getElementById('formStatus');
   const consent = document.getElementById('kf-consent').checked;
   if (!consent) { status.style.color = '#e0a89a'; status.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.'; return; }
-  const name = document.getElementById('kf-name').value.trim();
-  const email = document.getElementById('kf-email').value.trim();
-  const subject = document.getElementById('kf-subject').value.trim();
-  const message = document.getElementById('kf-message').value.trim();
-  if (!name || !email || !message) { status.style.color = '#e0a89a'; status.textContent = 'Bitte Name, E-Mail und Nachricht ausfüllen.'; return; }
-  const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\n\n' + message);
-  window.location.href = 'mailto:Muellerroland2016@gmail.com?subject=' + encodeURIComponent(subject || 'Anfrage über die Website') + '&body=' + body;
-}
+  status.style.color = '#d4b896'; status.textContent = 'Wird gesendet ...';
+  try {
+    const res = await fetch(formEl.action, { method: 'POST', body: new FormData(formEl), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { status.style.color = '#9bd09b'; status.textContent = 'Danke für Ihre Nachricht! Wir melden uns zeitnah bei Ihnen.'; formEl.reset(); }
+    else { status.style.color = '#e0a89a'; status.textContent = 'Es gab ein Problem. Bitte per E-Mail versuchen.'; }
+  } catch(err) {
+    status.style.color = '#e0a89a'; status.textContent = 'Es gab ein Problem. Bitte per E-Mail versuchen.';
+  }
+});
 
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
