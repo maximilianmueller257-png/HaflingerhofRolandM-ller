@@ -312,6 +312,7 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
     <a href="#stuten" onclick="closeNav()">Zuchtstuten</a>
     <a href="#erfolge" onclick="closeNav()">Erfolge</a>
     <a href="#partner" onclick="closeNav()">Partnerschaften</a>
+    <a href="#fohlen" onclick="closeNav()">Aktuelles</a>
     <a href="#kontakt" onclick="closeNav()">Kontakt</a>
   </div>
   <button class="nav-burger" id="navBurger" onclick="toggleNav()" aria-label="Menü">
@@ -501,11 +502,11 @@ footer { background:#2a1a08; text-align:center; padding:1.5rem 2rem; font-family
           <p class="prose" style="margin-bottom:1.2rem;">Bei der diesjährigen Fohleneintragung auf dem Haflingerhof Päse von Jürgen Kolodinski in Meinersen haben wir dreimal den ersten Platz erreicht.</p>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.2rem;">
             <div>
-              <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/WhatsApp%20Image%202026-07-12%20at%2016.44.03.jpeg" alt="Melissa mit Stutfohlen v. Stilecht – Fohleneintragung Päse 2026" style="width:100%; aspect-ratio:4/3; object-fit:cover; border:1px solid #e0ccaa; display:block; cursor:pointer; transition:transform 0.45s ease;" loading="lazy"></a>
+              <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/WhatsApp%20Image%202026-07-12%20at%2016.44.03.jpeg" alt="Melissa mit Stutfohlen v. Stilecht – Fohleneintragung Päse 2026" class="fohlen-verkauf-img" style="width:100%; aspect-ratio:4/3; object-fit:cover; border:1px solid #e0ccaa; display:block; cursor:pointer; transition:transform 0.45s ease;" loading="lazy"></a>
               <p style="font-family:Arial,sans-serif; font-size:0.7rem; color:#a08060; margin-top:0.4rem; font-style:italic;">Melissa mit Stutfohlen (V: Stilecht)</p>
             </div>
             <div>
-              <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/2WhatsApp%20Image%202026-07-12%20at%2016.44.03.jpeg" alt="Siegerhengstfohlen aus Melinda v. Stilecht – Fohleneintragung Päse 2026" style="width:100%; aspect-ratio:4/3; object-fit:cover; border:1px solid #e0ccaa; display:block; cursor:pointer; transition:transform 0.45s ease;" loading="lazy"></a>
+              <a><img src="https://raw.githubusercontent.com/maximilianmueller257-png/HaflingerhofRolandM-ller/main/2WhatsApp%20Image%202026-07-12%20at%2016.44.03.jpeg" alt="Siegerhengstfohlen aus Melinda v. Stilecht – Fohleneintragung Päse 2026" class="fohlen-verkauf-img" style="width:100%; aspect-ratio:4/3; object-fit:cover; border:1px solid #e0ccaa; display:block; cursor:pointer; transition:transform 0.45s ease;" loading="lazy"></a>
               <p style="font-family:Arial,sans-serif; font-size:0.7rem; color:#a08060; margin-top:0.4rem; font-style:italic;">Siegerhengstfohlen aus Melinda (V: Stilecht)</p>
             </div>
           </div>
@@ -760,7 +761,7 @@ function openLightbox(src, alt) {
   document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
-document.querySelectorAll('.stute-img, .fohlen-img-wrap img, .tl-img-side img, .erfolge-allegra img, .phil-img img').forEach(img => {
+document.querySelectorAll('.stute-img, .fohlen-img-wrap img, .tl-img-side img, .erfolge-allegra img, .phil-img img, .fohlen-verkauf-img').forEach(img => {
   img.addEventListener('click', () => openLightbox(img.src, img.alt));
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
